@@ -55,7 +55,7 @@ If you want to use this repo as a starting point for your own solutions, you can
 ### Reset all years
 
 ```bash
-go run ./cmd/cmd/generate -reset
+go run ./cmd/generate -reset
 ```
 
 ### Reset a year
