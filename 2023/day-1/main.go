@@ -1,7 +1,6 @@
 package main
 
 import (
-	utils "ashmortar/advent-of-code/utilities"
 	"fmt"
 	"log"
 	"sort"
@@ -11,10 +10,14 @@ import (
 	"unicode"
 
 	"github.com/TwiN/go-color"
+
+	utils "ashmortar/advent-of-code/utilities"
 )
 
-var year = "2023"
-var day = "1"
+var (
+	year = "2023"
+	day  = "1"
+)
 
 func Part1(input string) int {
 	output := 0
@@ -39,6 +42,46 @@ func Part2(input string) int {
 		output += code
 	}
 	return output
+}
+
+func Part2Extra(input string) int {
+	numberMap := map[string]string{
+		"zero":  "0",
+		"one":   "1",
+		"two":   "2",
+		"three": "3",
+		"four":  "4",
+		"five":  "5",
+		"six":   "6",
+		"seven": "7",
+		"eight": "8",
+		"nine":  "9",
+		"0":     "0",
+		"1":     "1",
+		"2":     "2",
+		"3":     "3",
+		"4":     "4",
+		"5":     "5",
+		"6":     "6",
+		"7":     "7",
+		"8":     "8",
+		"9":     "9",
+	}
+
+	output := 0
+	inputArray := strings.Split(input, "\n")
+	for _, c := range inputArray {
+		// start from the start of the string until a value is found
+		startLoc := 0
+		startNumber := ""
+		for startLoc <= len(c) {
+			startNumber += c[startLoc]
+			value, exist := numberMap[startNumber]
+			if exist {
+			}
+
+		}
+	}
 }
 
 func main() {
@@ -66,26 +109,41 @@ func main() {
 	fmt.Println(color.Bold + color.Purple + title + color.Reset)
 	fmt.Println(color.Bold + color.Blue + strings.Repeat("=", 55) + color.Reset)
 	fmt.Println(color.Bold + color.Blue + "Input:" + color.Reset)
-	fmt.Printf(color.Bold+"Lines: %-*d\tParse: %v\n"+color.Reset, printWidth, len(input), puzzleParseTime.Sub(startTime))
+	fmt.Printf(
+		color.Bold+"Lines: %-*d\tParse: %v\n"+color.Reset,
+		printWidth,
+		len(input),
+		puzzleParseTime.Sub(startTime),
+	)
 	fmt.Println(color.Bold + color.Blue + "Part 1:" + color.Reset)
-	fmt.Printf(color.Bold+"Result: %-*d\tTime: %v\n"+color.Reset, printWidth, result1, part1Time.Sub(puzzleParseTime))
+	fmt.Printf(
+		color.Bold+"Result: %-*d\tTime: %v\n"+color.Reset,
+		printWidth,
+		result1,
+		part1Time.Sub(puzzleParseTime),
+	)
 	fmt.Println(color.Bold + color.Blue + "Part 2:" + color.Reset)
-	fmt.Printf(color.Bold+"Result: %-*d\tTime: %v\n"+color.Reset, printWidth, result2, part2Time.Sub(part1Time))
+	fmt.Printf(
+		color.Bold+"Result: %-*d\tTime: %v\n"+color.Reset,
+		printWidth,
+		result2,
+		part2Time.Sub(part1Time),
+	)
 	fmt.Println(color.Bold+color.Blue+"Total Time:"+color.Reset, part2Time.Sub(startTime))
 	fmt.Print("\n")
 }
 
 func DetermineCode(s string) int {
-	//if the is empty return 0
+	// if the is empty return 0
 	if s == "" {
 		return 0
 	}
-	//if the string is of size 1 return a sum of char + char
+	// if the string is of size 1 return a sum of char + char
 	if len(s) == 1 {
 		combinedValue := s + s
 		return convertCodeToNumber(combinedValue)
 	}
-	//return sum of char + lastChar
+	// return sum of char + lastChar
 	firstCharacter := string(s[0])
 	lastCharacter := string(s[len(s)-1])
 	combinedValue := firstCharacter + lastCharacter
