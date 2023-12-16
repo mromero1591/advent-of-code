@@ -89,7 +89,6 @@ func Part2(input string) int {
 				power *= val
 			}
 			output += power
-			fmt.Println("set: ", set)
 		}
 
 	}

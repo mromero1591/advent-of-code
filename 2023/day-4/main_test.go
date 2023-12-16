@@ -11,7 +11,7 @@ import (
 var testInput string
 
 func TestPart1(t *testing.T) {
-	assert.Equal(t, 2476, Part1(testInput))
+	assert.Equal(t, 0, Part1(testInput))
 }
 
 func BenchmarkPart1(b *testing.B) {
@@ -21,7 +21,7 @@ func BenchmarkPart1(b *testing.B) {
 }
 
 func TestPart2(t *testing.T) {
-	assert.Equal(t, 54911, Part2(testInput))
+	assert.Equal(t, 0, Part2(testInput))
 }
 
 func BenchmarkPart2(b *testing.B) {

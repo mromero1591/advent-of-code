@@ -7,9 +7,8 @@ import (
 	"time"
 	"unicode"
 
-	utils "mromero1591/advent-of-code"
-
 	"github.com/TwiN/go-color"
+	utils "github.com/mromero1591/advent-of-code"
 )
 
 var (
