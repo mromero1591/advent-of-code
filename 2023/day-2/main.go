@@ -9,7 +9,7 @@ import (
 
 	"github.com/TwiN/go-color"
 
-	utils "ashmortar/advent-of-code/utilities"
+	utils "mromero1591/advent-of-code/utilities"
 )
 
 var (

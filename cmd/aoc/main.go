@@ -1,9 +1,9 @@
 package main
 
 import (
-	utils "ashmortar/advent-of-code/utilities"
 	"flag"
 	"fmt"
+	utils "mromero1591/advent-of-code/utilities"
 	"os"
 	"os/exec"
 	"path/filepath"

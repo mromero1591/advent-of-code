@@ -29,9 +29,6 @@ func fetchProblem(year int, day int) string {
 	fmt.Printf("Fetching problem for year %d day %d\n", year, day)
 	req, err := http.NewRequest("GET", url, nil)
 	req.Header.Set("Cookie", getCookie())
-
-	fmt.Printf("Req %v", req)
-
 	if err != nil {
 		panic(err)
 	}

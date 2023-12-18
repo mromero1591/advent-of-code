@@ -1,7 +1,7 @@
 package main
 
 import (
-	utils "ashmortar/advent-of-code/utilities"
+	utils "mromero1591/advent-of-code/utilities"
 	"regexp"
 
 	"flag"

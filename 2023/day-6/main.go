@@ -10,18 +10,52 @@ import (
 	"github.com/TwiN/go-color"
 )
 
-var year = "2023"
-var day = "4"
+var (
+	year = "2023"
+	day  = "6"
+)
+
+type Race struct {
+	RaceTime int
+	Record   int
+}
 
 func Part1(input string) int {
-	output := 0
+	output := 1
+	races := formatInput(input, false)
+	output = determineOutcomes(races)
 
 	return output
 }
 
 func Part2(input string) int {
-	output := 0
+	output := 1
+	races := formatInput(input, true)
+	output = determineOutcomes(races)
 	return output
+}
+
+func formatInput(str string, reduce bool) []Race {
+	inputLines := strings.Split(str, "\n")
+	races := []Race{}
+	raceTimes := strings.Fields(inputLines[0])[1:]
+	raceRecords := strings.Fields(inputLines[1])[1:]
+
+	if reduce {
+		raceTime := strings.Join(raceTimes, "")
+		raceTimes = []string{raceTime}
+
+		record := strings.Join(raceRecords, "")
+		raceRecords = []string{record}
+	}
+
+	for i := 0; i < len(raceTimes); i++ {
+		raceNum, _ := strconv.Atoi(raceTimes[i])
+		recordNum, _ := strconv.Atoi(raceRecords[i])
+		races = append(races, Race{RaceTime: raceNum, Record: recordNum})
+	}
+
+	return races
 }
 
 func main() {
@@ -56,4 +90,27 @@ func main() {
 	fmt.Printf(color.Bold+"Result: %-*d\tTime: %v\n"+color.Reset, printWidth, result2, part2Time.Sub(part1Time))
 	fmt.Println(color.Bold+color.Blue+"Total Time:"+color.Reset, part2Time.Sub(startTime))
 	fmt.Print("\n")
+}
+
+func determineDistanceTraveled(totalRaceTime int, timeHeld int) int {
+	totalTimeTraveled := totalRaceTime - timeHeld
+	speedOfTravel := timeHeld
+	distanceTraveled := totalTimeTraveled * speedOfTravel
+	return distanceTraveled
+}
+
+func determineOutcomes(races []Race) int {
+	outcome := 1
+	for _, race := range races {
+		possibleOutcomes := 0
+		for heldTime := 0; heldTime < race.RaceTime; heldTime++ {
+			distanceTraveled := determineDistanceTraveled(race.RaceTime, heldTime)
+			if distanceTraveled > race.Record {
+				possibleOutcomes++
+			}
+		}
+		outcome *= possibleOutcomes
+	}
+
+	return outcome
 }
