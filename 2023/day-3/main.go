@@ -7,8 +7,9 @@ import (
 	"time"
 	"unicode"
 
+	utils "mromero1591/advent-of-code/utilities"
+
 	"github.com/TwiN/go-color"
-	utils "github.com/mromero1591/advent-of-code"
 )
 
 var (
@@ -79,7 +80,7 @@ func main() {
 		return
 	}
 	startTime := time.Now()
-	input := utils.GetInputString(year, day)
+	input := utils.GetInputStringByName(year, day, "puzzle.txt")
 	puzzleParseTime := time.Now()
 	result1 := Part1(input)
 	part1Time := time.Now()

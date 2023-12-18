@@ -37,7 +37,6 @@ func fetchProblem(year int, day int) string {
 	}
 
 	resp, err := http.DefaultClient.Do(req)
-
 	if err != nil {
 		panic(err)
 	}
@@ -45,7 +44,6 @@ func fetchProblem(year int, day int) string {
 	defer resp.Body.Close()
 
 	bytes, err := io.ReadAll(resp.Body)
-
 	if err != nil {
 		panic(err)
 	}
@@ -61,7 +59,6 @@ func CacheProblem(year int, day int) string {
 	fmt.Printf("Caching problem for year %d day %d\n", year, day)
 	filepath := CreateFilepath(year, day, "problem.html")
 	err := os.WriteFile(filepath, []byte(problem), 0644)
-
 	if err != nil {
 		panic(err)
 	}
@@ -81,7 +78,6 @@ func fetchInput(year int, day int) string {
 	}
 
 	resp, err := http.DefaultClient.Do(req)
-
 	if err != nil {
 		panic(err)
 	}
@@ -89,7 +85,6 @@ func fetchInput(year int, day int) string {
 	defer resp.Body.Close()
 
 	bytes, err := io.ReadAll(resp.Body)
-
 	if err != nil {
 		panic(err)
 	}
@@ -111,7 +106,6 @@ func cacheInput(year int, day int) string {
 	fmt.Printf("Caching input for year %d day %d\n", year, day)
 	filepath := CreateFilepath(year, day, "puzzle.txt")
 	err := os.WriteFile(filepath, []byte(input), 0644)
-
 	if err != nil {
 		panic(err)
 	}
@@ -127,10 +121,13 @@ func GetInputArray(year int, day int) []string {
 	return strings.Split(GetInputString(year, day), "\n")
 }
 
+func GetInputArrayByFile(year int, day int, file string) []string {
+	return strings.Split(GetInputStringByName(year, day, file), "\n")
+}
+
 func GetInputString(year int, day int) string {
 	filepath := CreateFilepath(year, day, "puzzle.txt")
 	bytes, err := os.ReadFile(filepath)
-
 	if err != nil {
 		if os.IsNotExist(err) {
 			return cacheInput(year, day)
@@ -140,7 +137,20 @@ func GetInputString(year int, day int) string {
 	}
 
 	return string(bytes)
+}
 
+func GetInputStringByName(year int, day int, file string) string {
+	filepath := CreateFilepath(year, day, file)
+	bytes, err := os.ReadFile(filepath)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return cacheInput(year, day)
+		}
+
+		panic(err)
+	}
+
+	return string(bytes)
 }
 
 func RootDir() string {

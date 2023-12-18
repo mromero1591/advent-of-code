@@ -1,8 +1,8 @@
 package main
 
 import (
-	utils "ashmortar/advent-of-code/utilities"
 	"fmt"
+	utils "mromero1591/advent-of-code/utilities"
 	"strconv"
 	"strings"
 	"time"
@@ -10,8 +10,10 @@ import (
 	"github.com/TwiN/go-color"
 )
 
-var year = "{{Year}}"
-var day = "{{Day}}"
+var (
+	year = "{{Year}}"
+	day  = "{{Day}}"
+)
 
 func Part1(input string) int {
 	output := 0

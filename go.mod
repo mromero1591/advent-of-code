@@ -1,4 +1,4 @@
-module ashmortar/advent-of-code
+module mromero1591/advent-of-code
 
 go 1.21.4
 
